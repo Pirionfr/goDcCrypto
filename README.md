@@ -9,7 +9,7 @@ encrypt/decrypt lookatch agent message
 Build
 -----
 
-You can also download the source code and install it manually::
+You can also download the source code and install it manually:
 
     go build
 
