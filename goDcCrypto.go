@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
-	"os"
 	"fmt"
+	"github.com/Pirionfr/goDcCrypto/crypto"
+	"os"
 )
 
 func main() {
@@ -18,7 +19,6 @@ func main() {
 	// encrypt subcommand flag pointers
 	encryptKeyPtr := encryptCommand.String("k", "", "master key. (Required)")
 	encryptMsgPtr := encryptCommand.String("m", "", "message. (Required)")
-
 
 	if len(os.Args) < 2 {
 		fmt.Println("decrypt or encrypt subcommand is required")
@@ -39,7 +39,6 @@ func main() {
 		os.Exit(1)
 	}
 
-
 	if encryptCommand.Parsed() {
 		if *encryptKeyPtr == "" {
 			encryptCommand.PrintDefaults()
@@ -50,7 +49,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		res, err := EncryptString(*encryptMsgPtr, *encryptKeyPtr)
+		res, err := crypto.EncryptString(*encryptMsgPtr, *encryptKeyPtr)
 		if err != nil {
 			fmt.Printf("Error while encrypting message %s with master key %s\n", *encryptMsgPtr, *decryptKeyPtr)
 			os.Exit(1)
@@ -68,7 +67,7 @@ func main() {
 			os.Exit(1)
 		}
 
-		res, err := DecryptString(*decryptMsgPtr, *decryptKeyPtr)
+		res, err := crypto.DecryptString(*decryptMsgPtr, *decryptKeyPtr)
 		if err != nil {
 			fmt.Printf("Error while decrypting message %s with master key %s\n", *encryptMsgPtr, *decryptKeyPtr)
 			os.Exit(1)
